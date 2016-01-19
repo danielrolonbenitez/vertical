@@ -1,0 +1,44 @@
+.footer
+{
+background: #2c3e50;
+color: silver;    
+}
+.footer-title
+{
+
+font-size: 16px !important;
+color: white;
+text-decoration: underline;
+}
+
+.setlink
+{
+text-decoration: none; 
+color: silver !important;       
+}
+
+.close-modal-footer
+{
+float: right;    
+}
+
+.title-footer
+{
+  color: blue;
+  font-size: 18px;  
+}
+
+.caja
+{
+border-bottom:1px solid blue;	
+}
+
+.title-ask
+{
+color:blue	
+}
+
+.glyphicon-menu-down
+{
+color:blue;	
+}

@@ -1,0 +1,39 @@
+.filterable {
+    margin-top: 15px;
+}
+
+.panel-primary {
+    padding-right: 0px;
+    padding-left: 0px;
+    background-color: #FFFFFF;
+    border: solid 1px;
+    border-color: #08065F;
+    margin-bottom: 15px;
+}
+
+.filterable .panel-heading .pull-right {
+    margin-top: -20px;
+}
+
+.panel-body {
+    margin-bottom: 0px;
+    background-color:#FFFFFF;
+}
+
+.filterable .filters input[disabled] {
+    background-color: transparent;
+    border: none;
+    cursor: auto;
+    box-shadow: none;
+    padding: 0;
+    height: auto;
+}
+.filterable .filters input[disabled]::-webkit-input-placeholder {
+    color: #333;
+}
+.filterable .filters input[disabled]::-moz-placeholder {
+    color: #333;
+}
+.filterable .filters input[disabled]:-ms-input-placeholder {
+    color: #333;
+}

@@ -1,0 +1,13 @@
+.fondo-green{background: #16796e;}
+
+#encabezado{color: white;text-align: center;padding-top: 5px;padding-bottom: 5px;}
+.title-green{color:#16796e;}
+#administracion{float: left;margin-top: 20px}
+.centrar{margin-left: 250px}
+#consorcio{float:left;margin-left: 470px;}
+/*begin stile table*/
+#cuenta-title{clear: none;margin-top: 150px;color: white;text-align:center;padding-bottom: 5px;padding-top: 5px}
+
+.boldtable{font-size: 9px}
+td{border: 1px solid black;}
+.table-footer{background: #16796e;color: white;}

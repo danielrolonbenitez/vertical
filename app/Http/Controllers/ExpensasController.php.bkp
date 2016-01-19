@@ -1,0 +1,108 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
+use DB;
+use View;
+use Input;
+use App\Expensa;
+use App\Item;
+use App\Edificio;
+use App\Administrador;
+use Hash;
+use Redirect;
+use simplePaginate;
+use App\DescripcionGasto;
+use Response;
+use Session;
+use Auth;
+
+class ExpensasController extends Controller
+{
+
+    public function index()
+    {
+        $id=Input::get('id');       
+        
+        if ( Input::get('sortby') && Input::get('order') )
+        {    
+            $sortby = Input::get('sortby');
+            $order = Input::get('order');
+        }
+        else
+        {
+            $sortby = "id";
+            $order = "desc";     
+        }    
+        /*$items=DB::table('items')
+            ->whereNULL('deleted_at')
+            ->where ('id','like','%'.Input::get('search').'%')
+            ->orwhere ('unidad_id','like','%'.Input::get('search').'%')
+            ->orwhere ('importe','like','%'.Input::get('search').'%')
+            ->orderBy($sortby, $order)
+            ->simplePaginate(10);*/    
+
+        $expensas=DB::table('expensas')
+            ->where ('edificio_id','like',$id)
+            /*->where ('id','like','%'.Input::get('search').'%')
+            ->orwhere ('created_at','like','%'.Input::get('search').'%')
+            ->orwhere ('vencimiento','like','%'.Input::get('search').'%')*/
+            ->orderBy($sortby, $order)
+            ->simplePaginate(10);
+        
+        $expensas->setPath(route('expensas.index'));
+
+
+        if (Auth::user()->rol_id==2)
+        {
+            return View::make('administrador.expensas.index')->with('expensas', $expensas)->with('edificio_id', $id);
+            //return View::make('administrador.expensas.index');
+        }
+        if (Auth::user()->rol_id==3)
+        {
+            return View::make('propietario.expensas.index')->with('expensas', $expensas)->with('edificio_id', $id);
+            //return View::make('propietario.expensas.index');
+        }
+        if (Auth::user()->rol_id==4)
+        {
+            return View::make('inquilino.expensas.index')->with('expensas', $expensas)->with('edificio_id', $id);
+            //return View::make('propietario.expensas.index');
+        }
+    }
+
+    public function show($id)
+    {
+        
+        $edificio_id=Input::get('id');
+        $edificio=Edificio::find($edificio_id);
+        $administrador=Administrador::find($edificio->admin_id);
+        $items=Item::find($id);
+        $pisos=DB::table('items')
+            ->join('propietarios', 'propietarios.id', '=', 'items.unidad_id')
+            ->where('items.expensa_id', '=', $id)
+            ->get();
+
+        if (Auth::user()->rol_id==2)
+        {
+            return View::make('administrador.expensas.show')
+            ->with('items', $items)
+            ->with('edificio', $edificio)
+            ->with('admin', $administrador)
+            ->with('pisos', $pisos);
+            //return View::make('administrador.expensas.index');
+        }
+        if (Auth::user()->rol_id==3)
+        {
+            return View::make('propietario.expensas.show')
+            ->with('items', $items)
+            ->with('edificio', $edificio)
+            ->with('admin', $administrador)
+            ->with('pisos', $pisos);;
+            //return View::make('propietario.expensas.index');
+        }
+    }
+
+}

@@ -1,0 +1,27 @@
+
+.panel-heading
+{
+	color: #fff;
+    background-color: #08065f;
+    border-color: #08065f;
+
+	}
+
+#CreateForm{
+background: white;
+width: 50%;
+margin-top: 5%;
+margin-left: 15%;
+
+}	
+
+.form-footer
+{
+margin-left: 55%;
+padding-bottom: 10px;	
+}
+
+input{width: 155px !important;}
+
+#descripcion{max-width:155px !important; }
+#amenitie{width:155px !important; }

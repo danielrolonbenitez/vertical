@@ -1,0 +1,5 @@
+function borrar(){
+
+alert("hola");
+
+}
